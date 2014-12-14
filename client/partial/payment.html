@@ -1,0 +1,45 @@
+<div ng-controller="PaymentCtrl">
+    <md-toolbar md-scroll-shrink>
+        <h2 class="md-toolbar-tools">
+        <span>{{data.description}}</span>
+      </h2>
+    </md-toolbar>
+    <md-card class="main-card">
+        <div layout="row" layout="center center">
+            <md-text-float label="First Name" ng-model="form.first_name"></md-text-float>
+            <md-text-float label="Last Name" ng-model="form.last_name"></md-text-float>
+        </div>
+        <md-text-float label="Email" ng-model="form.email" type="email"></md-text-float>
+        <md-text-float label="Phone" ng-model="form.phone"></md-text-float>
+        <div class="question">
+            <div>Do you need a full area lift ticket?</div>
+            <md-radio-group ng-model="form.lift">
+                <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
+                <md-radio-button value="0" aria-label="No">No</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="question">
+            <div>Do you need Ski/Snowboad rental?</div>
+            <md-radio-group ng-model="form.rental">
+                <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
+                <md-radio-button value="0" aria-label="No">No</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="question">
+            <div>Do you need lesson?</div>
+            <md-radio-group ng-model="form.lesson">
+                <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
+                <md-radio-button value="0" aria-label="No">No</md-radio-button>
+            </md-radio-group>
+        </div>
+
+        <div class="total">
+            Total: ${{data.total}}
+        </div>
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-click="submit()">Submit</md-button>
+        </div>
+    </md-card>
+</div>

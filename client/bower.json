@@ -1,0 +1,27 @@
+{
+  "name": "start",
+  "version": "0.0.0",
+  "main": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "underscore": "latest",
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "angular-animate": "latest",
+    "angular-resource": "latest",
+    "angular-cookies": "latest",
+    "angular-mocks": "latest",
+    "angular-ui-utils": "latest",
+    "angular-bootstrap": "latest",
+    "ngstorage": "latest",
+    "less.js": "latest",
+    "font-awesome": "latest",
+    "angular-material": "latest"
+  }
+}
