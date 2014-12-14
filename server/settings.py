@@ -13,7 +13,7 @@ class PROD(Config):
 
 class STG(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://iwx:f4EBvtNFrDh4uAbb@localhost/start'
+    SQLALCHEMY_DATABASE_URI = 'mysql://start:Z6Rj2KXFwF3KNFEL@localhost/start'
 
 
 class DEV(Config):
