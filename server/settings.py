@@ -26,6 +26,12 @@ class PROD(Config):
 class STG(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql://start:Z6Rj2KXFwF3KNFEL@localhost/start'
+    PAYPAL_CONFIG = {
+        'API_USERNAME': 'sdk-three_api1.sdk.com',
+        'API_PASSWORD': 'QFZCWN5HZM8VBG7Q',
+        'API_SIGNATURE': 'A-IzJhZZjhg29XQ2qnhapuwxIDzyAZQ92FRP5dqBzVesOkzbdUONzmOU',
+        'API_ENVIRONMENT': 'SANDBOX'
+    }
 
 
 class DEV(Config):

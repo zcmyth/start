@@ -5,7 +5,8 @@ _transform_map = {}
 
 
 _transform_map[Event.__tablename__] = [
-    'description', 'lift', 'rental', 'lesson', 'bus']
+    'description', 'lift', 'rental',
+    'lesson', 'bus', 'ticket_num', 'ticket_left']
 
 _transform_map[Order.__tablename__] = []
 

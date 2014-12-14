@@ -48,6 +48,9 @@ angular.module('start').controller('PaymentCtrl', function(
         }, {
             value: $scope.form.phone,
             name: 'Phone'
+        }, {
+            value: $scope.form.location,
+            name: 'Location'
         }];
 
         for (var index in fieldsToCheck) {
@@ -63,7 +66,14 @@ angular.module('start').controller('PaymentCtrl', function(
         $http.post('/api/orders', $scope.form).success(function(data) {
             if (data.status === 'success') {
                 $window.location.href = data.data;
+            } else {
+                $scope.loading = false;
+                $mdToast.show($mdToast.simple()
+                    .content(data.error)
+                    .position('top fit'));
             }
+        }).error(function(data) {
+            //TODO(zhangchun): handle this
         });
     };
 });

@@ -1,16 +1,8 @@
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.hybrid import hybrid_property
 
 db = SQLAlchemy()
 NORMAL_STRING = 255
-
-
-class Event(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
-    description = db.Column(db.String(NORMAL_STRING))
-    rental = db.Column(db.Integer)
-    lift = db.Column(db.Integer)
-    lesson = db.Column(db.Integer)
-    bus = db.Column(db.Integer)
 
 
 class Order(db.Model):
@@ -27,3 +19,23 @@ class Order(db.Model):
     status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))
     total = db.Column(db.Integer)
     paypal_token = db.Column(db.String(NORMAL_STRING))
+    create_time = db.Column(db.DateTime)
+    location = db.Column(db.String(NORMAL_STRING))
+
+
+class Event(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    description = db.Column(db.String(NORMAL_STRING))
+    rental = db.Column(db.Integer)
+    lift = db.Column(db.Integer)
+    lesson = db.Column(db.Integer)
+    bus = db.Column(db.Integer)
+    ticket_num = db.Column(db.Integer)
+
+    @hybrid_property
+    def ticket_left(self):
+        paid_count = Order.query.filter_by(
+            event_id=self.id,
+            status='PAID'
+        ).count()
+        return self.ticket_num - paid_count

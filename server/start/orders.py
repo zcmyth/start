@@ -1,4 +1,5 @@
 from flask import Blueprint, request, current_app, url_for, redirect
+from datetime import datetime
 from .models import Order, Event
 from .response import Response
 
@@ -7,10 +8,14 @@ bp = Blueprint('orders', __name__)
 
 @bp.route('', methods=['POST'])
 def create_order():
+    # TODO(zhangchun): verify form data
     data = request.get_json()
     event = Event.query.get(data['event_id'])
     if not event:
         return Response.error('Invalid event')
+
+    if event.ticket_left < 1:
+        return Response.error('Sold out')
 
     total = (event.bus + int(data['lift']) * event.lift
                        + int(data['rental']) * event.rental
@@ -24,7 +29,9 @@ def create_order():
         lift=data['lift'],
         rental=data['rental'],
         lesson=data['lesson'],
+        location=data['location'],
         status='PENDING',
+        create_time=datetime.utcnow(),
         total=total
     )
     current_app.db.session.add(order)
@@ -32,6 +39,7 @@ def create_order():
 
     kw = {
         'amt': total,
+        'description': order.event.description,
         'currencycode': 'USD',
         'returnurl': url_for(
             'orders.paypal_confirm', order_id=order.id, _external=True),
@@ -56,6 +64,10 @@ def paypal_confirm():
         return 'Invalid order id'
     if order.paypal_token != token:
         return 'Invalid paypal token'
+    if order.event.ticket_left < 1:
+        return 'Sold out'
+    # TODO(zhangchun): ideally we should have a lock here to make sure
+    # only one payment will be accept each time
 
     getexp_response = current_app.paypal.get_express_checkout_details(
         token=token)
