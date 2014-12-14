@@ -6,9 +6,21 @@ class Config(object):
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_POOL_RECYCLE = 1800
 
+    PAYPAL_CONFIG = {
+        'API_USERNAME': 'sdk-three_api1.sdk.com',
+        'API_PASSWORD': 'QFZCWN5HZM8VBG7Q',
+        'API_SIGNATURE': 'A-IzJhZZjhg29XQ2qnhapuwxIDzyAZQ92FRP5dqBzVesOkzbdUONzmOU',
+        'API_ENVIRONMENT': 'SANDBOX'
+    }
+
 
 class PROD(Config):
-    pass
+    PAYPAL_CONFIG = {
+        'API_USERNAME': 'caviarcomm_api1.gmail.com',
+        'API_PASSWORD': 'R49929E743HPG8DN',
+        'API_SIGNATURE': 'A7f14DCoZRpIuf60c3wN2qUdd9nGANyyqtfk-MyDfwteO6Ac.G30m3Hq',
+        'API_ENVIRONMENT': 'PRODUCTION'
+    }
 
 
 class STG(Config):

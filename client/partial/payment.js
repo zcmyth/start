@@ -1,5 +1,7 @@
-angular.module('start').controller('PaymentCtrl', function($scope, $mdToast, $http, $stateParams) {
+angular.module('start').controller('PaymentCtrl', function(
+    $scope, $mdToast, $http, $stateParams, $window) {
 
+    $scope.loading = false;
     $scope.data = {};
     $scope.form = {
         event_id: $stateParams.event_id,
@@ -15,7 +17,7 @@ angular.module('start').controller('PaymentCtrl', function($scope, $mdToast, $ht
     };
 
     $http.get('/api/events/' + $stateParams.event_id).success(function(data) {
-        if (data.status) {
+        if (data.status === 'success') {
             $scope.data = data.data;
             $scope.data.total = getTotal();
         }
@@ -57,8 +59,11 @@ angular.module('start').controller('PaymentCtrl', function($scope, $mdToast, $ht
                 return;
             }
         }
-        $http.post('/api/orders', $scope.form).success(function() {
-            console.log('lalal');
+        $scope.loading = true;
+        $http.post('/api/orders', $scope.form).success(function(data) {
+            if (data.status === 'success') {
+                $window.location.href = data.data;
+            }
         });
     };
 });

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect, url_for,\
     request, abort
+from paypal import PayPalConfig
+from paypal import PayPalInterface
 from .utils import CustomJSONEncoder
 from .models import db
 
@@ -13,6 +15,8 @@ def create_app(config):
     app.config.from_object(config)
 
     app.json_encoder = CustomJSONEncoder
+    app.paypal = PayPalInterface(
+        config=PayPalConfig(**app.config['PAYPAL_CONFIG']))
 
     @app.route('/')
     def to_app():

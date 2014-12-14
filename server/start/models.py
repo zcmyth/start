@@ -26,3 +26,4 @@ class Order(db.Model):
     lesson = db.Column(db.Boolean)
     status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))
     total = db.Column(db.Integer)
+    paypal_token = db.Column(db.String(NORMAL_STRING))
