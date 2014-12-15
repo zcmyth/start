@@ -37,18 +37,16 @@ def create_order():
         create_time=datetime.utcnow(),
         total=total
     )
-    current_app.db.session.add(order)
-    current_app.db.session.commit()
 
     kw = {
-        'amt': total,
-        'description': order.event.description,
+        'PAYMENTREQUEST_0_AMT': total,
+        'PAYMENTREQUEST_0_PAYMENTACTION': 'Sale',
+        'PAYMENTREQUEST_0_NAME': 'Ski|Snowboard trip',
         'currencycode': 'USD',
         'returnurl': url_for(
             'orders.paypal_confirm', order_id=order.id, _external=True),
         'cancelurl': url_for(
             'ngapp.home', _external=True) + '#/' + data['event_id'],
-        'paymentaction': 'Sale'
     }
 
     setexp_response = current_app.paypal.set_express_checkout(**kw)
@@ -57,7 +55,7 @@ def create_order():
 
     return Response.success(
         current_app.paypal.generate_express_checkout_redirect_url(
-            setexp_response.token))
+            setexp_response.token) + '&useraction=commit')
 
 
 @bp.route('/confirm', methods=['GET'])
