@@ -73,7 +73,7 @@ angular.module('start').controller('PaymentCtrl', function(
                     .position('top fit'));
             }
         }).error(function(data) {
-            //TODO(zhangchun): handle this
+            $scope.loading = true;
         });
     };
 });

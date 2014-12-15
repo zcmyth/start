@@ -1,4 +1,6 @@
-from flask import Blueprint, request, current_app, url_for, redirect
+import uuid
+from flask import Blueprint, request, current_app, url_for, redirect,\
+    render_template
 from datetime import datetime
 from .models import Order, Event
 from .response import Response
@@ -21,6 +23,7 @@ def create_order():
                        + int(data['rental']) * event.rental
                        + int(data['lesson']) * event.lesson)
     order = Order(
+        id=str(uuid.uuid1()),
         event_id=data['event_id'],
         first_name=data['first_name'],
         last_name=data['last_name'],
@@ -50,6 +53,8 @@ def create_order():
 
     setexp_response = current_app.paypal.set_express_checkout(**kw)
     order.paypal_token = setexp_response.token
+    current_app.db.session.add(order)
+
     return Response.success(
         current_app.paypal.generate_express_checkout_redirect_url(
             setexp_response.token))
@@ -84,10 +89,11 @@ def paypal_confirm():
             .paypal.get_express_checkout_details(token=token)
         if checkout_response['CHECKOUTSTATUS'] == 'PaymentActionCompleted':
             order.status = 'PAID'
-        return """
-            Awesome! Thank you for your %s %s purchase.<br/>
-            An email will be sent to your to confirm this order.
-        """ % (checkout_response['AMT'], checkout_response['CURRENCYCODE'])
+        return render_template('confirm.html', **{
+            'email': 'startnewyork@gmail.com',
+            'order_id': order.id,
+            'total': checkout_response['AMT']
+        })
     return 'Something wrong in Paypal'
 
 

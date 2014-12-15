@@ -6,7 +6,7 @@ NORMAL_STRING = 255
 
 
 class Order(db.Model):
-    id = db.Column(db.Integer(), primary_key=True)
+    id = db.Column(db.String(NORMAL_STRING), primary_key=True)
     event_id = db.Column(db.Integer(), db.ForeignKey('event.id'))
     event = db.relationship('Event')
     first_name = db.Column(db.String(NORMAL_STRING))
