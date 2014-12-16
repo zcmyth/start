@@ -15,6 +15,7 @@ class Config(object):
 
 
 class PROD(Config):
+    SQLALCHEMY_DATABASE_URI = 'mysql://start:Z8Rj2KXFwF3KNFEL@173.194.251.111/start'
     PAYPAL_CONFIG = {
         'API_USERNAME': 'caviarcomm_api1.gmail.com',
         'API_PASSWORD': 'R49929E743HPG8DN',
