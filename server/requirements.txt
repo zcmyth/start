@@ -1,4 +1,12 @@
+SQLAlchemy
 Flask
 Flask-SQLAlchemy
 Flask-Script
+Flask-Migrate
+mysql-python
+python-dateutil
+pytz
+nose
+requests
+redis
 paypal
