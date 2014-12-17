@@ -42,6 +42,7 @@ def create_order():
         'PAYMENTREQUEST_0_AMT': total,
         'PAYMENTREQUEST_0_PAYMENTACTION': 'Sale',
         'PAYMENTREQUEST_0_NAME': 'Ski|Snowboard trip',
+        'SOLUTIONTYPE': 'Sole',
         'currencycode': 'USD',
         'returnurl': url_for(
             'orders.paypal_confirm', order_id=order.id, _external=True),
