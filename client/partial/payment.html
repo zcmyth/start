@@ -12,7 +12,7 @@
         <md-text-float label="Email" ng-model="form.email" type="email"></md-text-float>
         <md-text-float label="Phone" ng-model="form.phone"></md-text-float>
         <div class="question">
-            <div>Do you need a full area lift ticket?</div>
+            <div>Do you need a full area lift ticket? (${{data.lift}})</div>
             <md-radio-group ng-model="form.lift">
                 <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="question">
-            <div>Do you need Ski/Snowboad rental?</div>
+            <div>Do you need Ski/Snowboad rental? (${{data.rental}})</div>
             <md-radio-group ng-model="form.rental">
                 <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="question">
-            <div>Do you need lesson?</div>
+            <div>Do you need lesson? (${{data.lesson}})</div>
             <md-radio-group ng-model="form.lesson">
                 <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
@@ -39,7 +39,7 @@
             <div>Please chose the pickup location?</div>
             <md-radio-group ng-model="form.location">
                 <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 7:00 am</md-radio-button>
-                <md-radio-button value="UNION_SQUARE" aria-label="Union square">Union square at 6:30 am</md-radio-button>
+                <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 6:30 am</md-radio-button>
             </md-radio-group>
         </div>
 
