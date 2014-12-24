@@ -8,6 +8,7 @@ from .models import db
 
 def _log_config(app):
     if not app.debug and not app.testing:
+        import logging
         from logging.handlers import RotatingFileHandler
         file_handler = RotatingFileHandler(
             app.config.get('LOGGING_PATH'),
