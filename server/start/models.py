@@ -15,6 +15,7 @@ class Order(db.Model):
     phone = db.Column(db.String(NORMAL_STRING))
     rental = db.Column(db.Boolean)
     lift = db.Column(db.Boolean)
+    bus = db.Column(db.Boolean)
     lesson = db.Column(db.Boolean)
     status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))
     total = db.Column(db.Integer)

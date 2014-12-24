@@ -8,7 +8,8 @@ angular.module('start').controller('PaymentCtrl', function(
         bus: 0,
         lift: 0,
         rental: 0,
-        lesson: 0
+        lesson: 0,
+        location: ''
     };
 
     var getTotal = function() {
@@ -52,9 +53,6 @@ angular.module('start').controller('PaymentCtrl', function(
         }, {
             value: $scope.form.phone,
             name: 'Phone'
-        }, {
-            value: $scope.form.location,
-            name: 'Location'
         }];
 
         for (var index in fieldsToCheck) {
@@ -66,6 +64,12 @@ angular.module('start').controller('PaymentCtrl', function(
                 return;
             }
         }
+        if (parseInt($scope.form.bus) === 1 && !$scope.form.location) {
+            $mdToast.show($mdToast.simple()
+                    .content('Please select pickup location')
+                    .position('top fit'));
+                return;
+        }
         $scope.loading = true;
         $http.post('/api/orders', $scope.form).success(function(data) {
             if (data.status === 'success') {
@@ -73,11 +77,14 @@ angular.module('start').controller('PaymentCtrl', function(
             } else {
                 $scope.loading = false;
                 $mdToast.show($mdToast.simple()
-                    .content(data.error)
+                    .content(data.message)
                     .position('top fit'));
             }
         }).error(function(data) {
-            $scope.loading = true;
+            $mdToast.show($mdToast.simple()
+                    .content('Something wrong...')
+                    .position('top fit'));
+            $scope.loading = false;
         });
     };
 });

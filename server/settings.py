@@ -12,6 +12,8 @@ class Config(object):
         'API_SIGNATURE': 'A-IzJhZZjhg29XQ2qnhapuwxIDzyAZQ92FRP5dqBzVesOkzbdUONzmOU',
         'API_ENVIRONMENT': 'SANDBOX'
     }
+    LOGGING_PATH = '/home/zhangchun/start.log'
+    LOGGING_SIZE = 10 * 1024 * 1024 # 10 mb
 
 
 class PROD(Config):
@@ -22,6 +24,7 @@ class PROD(Config):
         'API_SIGNATURE': 'A7f14DCoZRpIuf60c3wN2qUdd9nGANyyqtfk-MyDfwteO6Ac.G30m3Hq',
         'API_ENVIRONMENT': 'PRODUCTION'
     }
+    LOGGING_PATH = '/home/zhangchun88_gmail_com/start.log'
 
 
 class STG(Config):

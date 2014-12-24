@@ -4,6 +4,7 @@ from flask import Blueprint, request, current_app, url_for, redirect,\
 from datetime import datetime
 from .models import Order, Event
 from .response import Response
+from paypal.exceptions import PayPalAPIResponseError
 
 bp = Blueprint('orders', __name__)
 
@@ -30,6 +31,7 @@ def create_order():
         last_name=data['last_name'],
         phone=data['phone'],
         email=data['email'],
+        bus=data['bus'],
         lift=data['lift'],
         rental=data['rental'],
         lesson=data['lesson'],
@@ -72,13 +74,17 @@ def create_order():
         kw[template % ('AMT', n)] = event.lesson
         n = n + 1
 
-    setexp_response = current_app.paypal.set_express_checkout(**kw)
-    order.paypal_token = setexp_response.token
-    current_app.db.session.add(order)
+    try:
+        setexp_response = current_app.paypal.set_express_checkout(**kw)
+        order.paypal_token = setexp_response.token
+        current_app.db.session.add(order)
 
-    return Response.success(
-        current_app.paypal.generate_express_checkout_redirect_url(
-            setexp_response.token) + '&useraction=commit')
+        return Response.success(
+            current_app.paypal.generate_express_checkout_redirect_url(
+                setexp_response.token) + '&useraction=commit')
+    except PayPalAPIResponseError as e:
+        current_app.logger.warning(str(e))
+        return Response.error(str(e))
 
 
 @bp.route('/confirm', methods=['GET'])

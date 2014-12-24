@@ -6,6 +6,16 @@ from .utils import CustomJSONEncoder
 from .models import db
 
 
+def _log_config(app):
+    if not app.debug and not app.testing:
+        from logging.handlers import RotatingFileHandler
+        file_handler = RotatingFileHandler(
+            app.config.get('LOGGING_PATH'),
+            maxBytes=app.config.get('LOGGING_SIZE'))
+        file_handler.setLevel(logging.WARNING)
+        app.logger.addHandler(file_handler)
+
+
 def create_app(config):
     app = Flask(
         __name__,
@@ -13,6 +23,8 @@ def create_app(config):
         static_folder='../../client/static',
         static_url_path="/static")
     app.config.from_object(config)
+
+    _log_config(app)
 
     app.json_encoder = CustomJSONEncoder
     app.paypal = PayPalInterface(
