@@ -9,19 +9,23 @@
 </head>
 
 <body>
-  <table>
+  <table border="2">
     <tr>
       <th>Name</th>
       <th>Lift</th>
       <th>Rental</th>
+      <th>Beginner Package</th>
       <th>Location</th>
+      <th>Total</th>
     </tr>
   {% for order in orders %}
     <tr>
       <td>{{order.first_name}} {{order.last_name}}</td>
       <td>{{order.lift}}</td>
       <td>{{order.rental}}</td>
+      <td>{{order.lesson}}</td>
       <td>{{order.location}}</td>
+      <td>{{order.total}}</td>
     </tr>
   {% endfor %}
   </table>
