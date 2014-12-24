@@ -37,6 +37,7 @@ class Event(db.Model):
     def ticket_left(self):
         paid_count = Order.query.filter_by(
             event_id=self.id,
-            status='PAID'
+            status='PAID',
+            bus=True
         ).count()
         return self.ticket_num - paid_count
