@@ -34,9 +34,16 @@ angular.module('start').controller('PaymentCtrl', function(
     });
 
     $scope.$watch('form.lesson', function() {
+        if (parseInt($scope.form.lesson) === 1) {
+            $scope.form.lift = '0';
+            $scope.form.rental = '0';
+        }
         $scope.data.total = getTotal();
     });
     $scope.$watch('form.bus', function() {
+        if (parseInt($scope.form.bus) === 1) {
+            $scope.form.location = '';
+        }
         $scope.data.total = getTotal();
     });
 
