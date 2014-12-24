@@ -19,9 +19,10 @@ def create_order():
     if event.ticket_left < 1:
         return Response.error('Sold out')
 
-    total = (event.bus + int(data['lift']) * event.lift
-                       + int(data['rental']) * event.rental
-                       + int(data['lesson']) * event.lesson)
+    total = (int(data['bus']) * event.bus
+             + int(data['lift']) * event.lift
+             + int(data['rental']) * event.rental
+             + int(data['lesson']) * event.lesson)
     order = Order(
         id=str(uuid.uuid1()),
         event_id=data['event_id'],
@@ -41,7 +42,6 @@ def create_order():
     kw = {
         'PAYMENTREQUEST_0_AMT': total,
         'PAYMENTREQUEST_0_PAYMENTACTION': 'Sale',
-        'PAYMENTREQUEST_0_NAME': 'Ski|Snowboard trip',
         'SOLUTIONTYPE': 'Sole',
         'currencycode': 'USD',
         'returnurl': url_for(
@@ -49,6 +49,28 @@ def create_order():
         'cancelurl': url_for(
             'ngapp.home', _external=True) + '#/' + data['event_id'],
     }
+
+    n = 0
+    template = 'L_PAYMENTREQUEST_0_%s%s'
+    if int(data['bus']) > 0:
+        kw[template % ('NAME', n)] = 'Bus'
+        kw[template % ('AMT', n)] = event.bus
+        n = n + 1
+
+    if int(data['lift']) > 0:
+        kw[template % ('NAME', n)] = 'Lift'
+        kw[template % ('AMT', n)] = event.lift
+        n = n + 1
+
+    if int(data['rental']) > 0:
+        kw[template % ('NAME', n)] = 'Rental'
+        kw[template % ('AMT', n)] = event.rental
+        n = n + 1
+
+    if int(data['lesson']) > 0:
+        kw[template % ('NAME', n)] = 'Beginner package'
+        kw[template % ('AMT', n)] = event.lesson
+        n = n + 1
 
     setexp_response = current_app.paypal.set_express_checkout(**kw)
     order.paypal_token = setexp_response.token
@@ -91,7 +113,8 @@ def paypal_confirm():
         return render_template('confirm.html', **{
             'email': 'startnewyork@gmail.com',
             'order_id': order.id,
-            'total': checkout_response['AMT']
+            'total': checkout_response['AMT'],
+            'first_name': order.first_name
         })
     return 'Something wrong in Paypal'
 

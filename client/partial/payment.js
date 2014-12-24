@@ -5,6 +5,7 @@ angular.module('start').controller('PaymentCtrl', function(
     $scope.data = {};
     $scope.form = {
         event_id: $stateParams.event_id,
+        bus: 0,
         lift: 0,
         rental: 0,
         lesson: 0
@@ -13,7 +14,7 @@ angular.module('start').controller('PaymentCtrl', function(
     var getTotal = function() {
         var data = $scope.data;
         var form = $scope.form;
-        return data.bus + data.lift * form.lift + data.rental * form.rental + data.lesson * form.lesson;
+        return data.bus* form.bus + data.lift * form.lift + data.rental * form.rental + data.lesson * form.lesson;
     };
 
     $http.get('/api/events/' + $stateParams.event_id).success(function(data) {
@@ -32,6 +33,9 @@ angular.module('start').controller('PaymentCtrl', function(
     });
 
     $scope.$watch('form.lesson', function() {
+        $scope.data.total = getTotal();
+    });
+    $scope.$watch('form.bus', function() {
         $scope.data.total = getTotal();
     });
 

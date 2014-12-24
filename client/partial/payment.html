@@ -1,16 +1,27 @@
 <div ng-controller="PaymentCtrl">
     <md-toolbar md-scroll-shrink>
         <h2 class="md-toolbar-tools">
-        <span>{{data.description}} ({{data.ticket_left}} left)</span>
+        <span>{{data.description}}</span>
       </h2>
     </md-toolbar>
     <md-card class="main-card">
+
+        <div class="ticket_left">{{data.ticket_left}} left in stock</div>
         <div layout="row" layout="center center">
             <md-text-float label="First Name" ng-model="form.first_name"></md-text-float>
             <md-text-float label="Last Name" ng-model="form.last_name"></md-text-float>
         </div>
         <md-text-float label="Email" ng-model="form.email" type="email"></md-text-float>
         <md-text-float label="Phone" ng-model="form.phone"></md-text-float>
+
+        <div class="question">
+            <div>Do you need a bus ride? (${{data.bus}})</div>
+            <md-radio-group ng-model="form.bus">
+                <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
+                <md-radio-button value="0" aria-label="No">No</md-radio-button>
+            </md-radio-group>
+        </div>
+
         <div class="question">
             <div>Do you need a full area lift ticket? (${{data.lift}})</div>
             <md-radio-group ng-model="form.lift">
@@ -28,7 +39,7 @@
         </div>
 
         <div class="question">
-            <div>Do you need a lesson? (${{data.lesson}})</div>
+            <div>Do you need a beginner package, which will include beginner lift, rental and lesson? (${{data.lesson}})</div>
             <md-radio-group ng-model="form.lesson">
                 <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
@@ -38,8 +49,8 @@
         <div class="question">
             <div>Please chose the pickup location?</div>
             <md-radio-group ng-model="form.location">
-                <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 7:00 am</md-radio-button>
-                <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 6:30 am</md-radio-button>
+                <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 7:30 am</md-radio-button>
+                <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 7:00 am</md-radio-button>
             </md-radio-group>
         </div>
 
