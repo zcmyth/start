@@ -5,7 +5,7 @@ angular.module('start').controller('PaymentCtrl', function(
     $scope.data = {};
     $scope.form = {
         event_id: $stateParams.event_id,
-        bus: 0,
+        bus: 1,
         lift: 0,
         rental: 0,
         lesson: 0,
