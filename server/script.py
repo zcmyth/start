@@ -21,7 +21,7 @@ def update_event():
         rental=32,
         lift=51,
         lesson=63,
-        bus=45,
+        bus=42,
         ticket_num=55
     )
     app.db.session.merge(event)

@@ -1,5 +1,20 @@
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.mysql.mysqldb import MySQLDialect_mysqldb
+from sqlalchemy.pool import NullPool
 from sqlalchemy.ext.hybrid import hybrid_property
+
+
+class MySQLDialect_cloudsql(MySQLDialect_mysqldb):
+
+    @classmethod
+    def get_pool_class(cls, url):
+        # Cloud SQL connections die at any moment
+        return NullPool
+
+
+from sqlalchemy.dialects import registry
+registry.register("cloudsql", "start.models", "MySQLDialect_cloudsql")
+
 
 db = SQLAlchemy()
 NORMAL_STRING = 255
