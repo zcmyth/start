@@ -56,3 +56,28 @@ class Event(db.Model):
             bus=True
         ).count()
         return self.ticket_num - paid_count
+
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    description = db.Column(db.String(NORMAL_STRING))
+    lift = db.Column(db.Integer)
+    snowboard = db.Column(db.Integer)
+    ski = db.Column(db.Integer)
+
+
+class TicketOrder(db.Model):
+    id = db.Column(db.String(NORMAL_STRING), primary_key=True)
+    ticket_id = db.Column(db.Integer(), db.ForeignKey('ticket.id'))
+    ticket = db.relationship('Ticket')
+    first_name = db.Column(db.String(NORMAL_STRING))
+    last_name = db.Column(db.String(NORMAL_STRING))
+    email = db.Column(db.String(NORMAL_STRING))
+    phone = db.Column(db.String(NORMAL_STRING))
+    lift = db.Column(db.Integer)
+    snowboard = db.Column(db.Integer)
+    ski = db.Column(db.Integer)
+    status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))
+    total = db.Column(db.Integer)
+    paypal_token = db.Column(db.String(NORMAL_STRING))
+    create_time = db.Column(db.DateTime)

@@ -48,6 +48,9 @@ def create_app(config):
     import orders
     app.register_blueprint(orders.bp, url_prefix='/api/orders')
 
+    import tickets
+    app.register_blueprint(tickets.bp, url_prefix='/api/tickets')
+
     import events
     app.register_blueprint(events.bp, url_prefix='/api/events')
 

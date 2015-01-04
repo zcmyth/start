@@ -3,9 +3,17 @@ angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial']);
 angular.module('start').config(
     function($stateProvider, $urlRouterProvider, $locationProvider) {
         //$locationProvider.html5Mode(true);
-        $stateProvider.state('welcome', {
+        $stateProvider.state('main', {
             url: '/:event_id',
             templateUrl: 'partial/payment.html'
+        });
+        $stateProvider.state('trip', {
+            url: '/trip/:event_id',
+            templateUrl: 'partial/payment.html'
+        });
+        $stateProvider.state('ticket', {
+            url: '/ticket/:ticket_id',
+            templateUrl: 'partial/ticket.html'
         });
         /* Add New States Above */
         $urlRouterProvider.otherwise('/');

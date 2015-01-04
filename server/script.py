@@ -4,7 +4,7 @@ from flask.ext.script import Manager
 from start import create_app
 from settings import DEV as ENV
 from flask.ext.migrate import Migrate, MigrateCommand
-from start.models import Event, Order
+from start.models import Event, Ticket
 
 app = create_app(ENV)
 manager = Manager(app)
@@ -28,17 +28,17 @@ def update_event():
     app.db.session.commit()
 
 
-@manager.option('-i', '--id', help='event id')
-def event(id):
-    orders = Order.query.filter_by(
-        event_id=id,
-        status='PAID'
-    ).all()
-    print 'name, lift, rental, location, total'
-    for order in orders:
-        print '%s %s, %s, %s, %s, %s' % (order.first_name, order.last_name,
-                                         order.lift, order.rental,
-                                         order.location, order.total)
+@manager.command
+def update_ticket():
+    ticket = Ticket(
+        id=2,
+        description='Ski|Snowboarding Day Trip to Camelback Mountain Jan 10',
+        lift=56,
+        snowboard=36,
+        ski=36
+    )
+    app.db.session.merge(ticket)
+    app.db.session.commit()
 
 
 if __name__ == "__main__":
