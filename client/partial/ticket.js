@@ -5,7 +5,7 @@ angular.module('start').controller('TicketCtrl', function(
     $scope.data = {};
     $scope.form = {
         ticket_id: $stateParams.ticket_id,
-        lift: 0,
+        lift: 6,
         snowboard: 0,
         ski: 0,
     };
