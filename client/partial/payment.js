@@ -1,5 +1,5 @@
 angular.module('start').controller('PaymentCtrl', function(
-    $scope, $mdToast, $http, $stateParams, $window, $location) {
+    $scope, $mdToast, $http, $stateParams, $window) {
 
     $scope.loading = false;
     $scope.data = {};
@@ -11,10 +11,6 @@ angular.module('start').controller('PaymentCtrl', function(
         lesson: 0,
         location: ''
     };
-
-    if ($location.search().bus === '0') {
-        $scope.form.bus = 0;
-    }
 
     var getTotal = function() {
         var data = $scope.data;

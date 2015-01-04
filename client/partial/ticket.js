@@ -1,5 +1,5 @@
 angular.module('start').controller('TicketCtrl', function(
-    $scope, $mdToast, $http, $stateParams, $window, $location) {
+    $scope, $mdToast, $http, $stateParams, $window) {
 
     $scope.loading = false;
     $scope.data = {};
