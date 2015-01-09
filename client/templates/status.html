@@ -12,8 +12,8 @@
   <table border="2">
     <tr>
       <th>Name</th>
-      <th>Bus</th>
       <th>Location</th>
+      <th>Bus</th>
       <th>Beginner Package</th>
       <th>Lift</th>
       <th>Rental</th>
@@ -22,14 +22,23 @@
   {% for order in orders %}
     <tr>
       <td>{{order.first_name}} {{order.last_name}}</td>
-      <td>{{order.bus}}</td>
       <td>{{order.location}}</td>
-      <td>{{order.lesson}}</td>
-      <td>{{order.lift}}</td>
-      <td>{{order.rental}}</td>
+      <td>{{order.bus + 0}}</td>
+      <td>{{order.lesson + 0}}</td>
+      <td>{{order.lift + 0}}</td>
+      <td>{{order.rental + 0}}</td>
       <td>{{order.total}}</td>
     </tr>
   {% endfor %}
+    <tr>
+      <td></td>
+      <td></td>
+      <td>{{status.bus}}</td>
+      <td>{{status.lesson}}</td>
+      <td>{{status.lift}}</td>
+      <td>{{status.rental}}</td>
+      <td>{{status.total}}</td>
+    </tr>
   </table>
 </body>
 
