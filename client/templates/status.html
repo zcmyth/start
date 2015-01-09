@@ -13,6 +13,7 @@
   <table border="2">
     <tr>
       <th>Name</th>
+      <th>Phone</th>
       <th>Location</th>
       <th>Bus</th>
       <th>Beginner Package</th>
@@ -23,6 +24,7 @@
   {% for order in orders %}
     <tr>
       <td>{{order.first_name}} {{order.last_name}}</td>
+      <td>{{order.phone}}</td>
       <td>{{order.location}}</td>
       <td>{{order.bus + 0}}</td>
       <td>{{order.lesson + 0}}</td>
@@ -32,7 +34,7 @@
     </tr>
   {% endfor %}
     <tr>
-      <td colspan="2"></td>
+      <td colspan="3"></td>
       <td>{{status.bus}}</td>
       <td>{{status.lesson}}</td>
       <td>{{status.lift}}</td>
