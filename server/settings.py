@@ -12,7 +12,7 @@ class Config(object):
         'API_ENVIRONMENT': 'SANDBOX'
     }
     LOGGING_PATH = '/home/zhangchun/start.log'
-    LOGGING_SIZE = 10 * 1024 * 1024 # 10 mb
+    LOGGING_SIZE = 10 * 1024 * 1024  # 10 mb
 
 
 class PROD(Config):

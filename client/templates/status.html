@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <h2>{{name}}</h2>
   <table border="2">
     <tr>
       <th>Name</th>
@@ -31,8 +32,7 @@
     </tr>
   {% endfor %}
     <tr>
-      <td></td>
-      <td></td>
+      <td colspan="2"></td>
       <td>{{status.bus}}</td>
       <td>{{status.lesson}}</td>
       <td>{{status.lift}}</td>
@@ -40,6 +40,28 @@
       <td>{{status.total}}</td>
     </tr>
   </table>
+
+  {% if ticket_orders %}
+  <h2>Group tickets</h2>
+  <table border="2">
+    <tr>
+      <th>Name</th>
+      <th>Lift</th>
+      <th>Snowboard</th>
+      <th>Ski</th>
+      <th>Total</th>
+    </tr>
+  {% for order in ticket_orders %}
+    <tr>
+      <td>{{order.first_name}} {{order.last_name}}</td>
+      <td>{{order.lift}}</td>
+      <td>{{order.snowboard}}</td>
+      <td>{{order.ski}}</td>
+      <td>{{order.total}}</td>
+    </tr>
+  {% endfor %}
+  </table>
+  {% endif %}
 </body>
 
 </html>

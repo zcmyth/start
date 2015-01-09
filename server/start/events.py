@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from .models import Event, Order, TicketOrder
 from .response import Response
+from .httpauth import auth
 
 bp = Blueprint('events', __name__)
 
@@ -10,8 +11,12 @@ def get_event(id):
     return Response.success(Event.query.get(id))
 
 
-@bp.route('/eventstatusxuning/<int:id>', methods=['GET'])
+@auth.login_required
+@bp.route('/<int:id>/status', methods=['GET'])
 def get_event_order_status(id):
+    event = Event.query.get(id)
+    if not event:
+        return 'Invalid event id'
     orders = Order.query.filter_by(
         event_id=id,
         status='PAID'
@@ -33,13 +38,14 @@ def get_event_order_status(id):
         if order.lesson:
             s['lesson'] += 1
         s['total'] += order.total
-    return render_template('status.html', orders=orders, status=s)
 
-
-@bp.route('/ticketstatusxuning/<int:id>', methods=['GET'])
-def get_ticket_order_status(id):
-    orders = TicketOrder.query.filter_by(
+    ticket_orders = TicketOrder.query.filter_by(
         ticket_id=id,
         status='PAID'
     ).all()
-    return render_template('ticket_status.html', orders=orders)
+    return render_template(
+        'status.html',
+        name=event.description,
+        orders=orders,
+        status=s,
+        ticket_orders=ticket_orders)
