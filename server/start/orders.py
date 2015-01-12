@@ -38,7 +38,8 @@ def create_order():
         location=data['location'],
         status='PENDING',
         create_time=datetime.utcnow(),
-        total=total
+        total=total,
+        rental_type=data.get('rental_type', '')
     )
 
     kw = {

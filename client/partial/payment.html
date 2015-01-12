@@ -61,6 +61,16 @@
         </div>
         </div>
 
+        <div ng-if="form.lesson == 1 || form.rental == 1">
+        <div class="question">
+            <div>Do you ride ski or snownboard?</div>
+            <md-radio-group ng-model="form.rental_type">
+                <md-radio-button value="SKI" aria-label="SKI">Ski</md-radio-button>
+                <md-radio-button value="SNOWBOARD" aria-label="SNOWBOARD">Snownboard</md-radio-button>
+            </md-radio-group>
+        </div>
+        </div>
+
         <div class="total">
             Total: ${{data.total}}
         </div>

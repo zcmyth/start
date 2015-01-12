@@ -19,6 +19,7 @@
       <th>Beginner Package</th>
       <th>Lift</th>
       <th>Rental</th>
+      <th>Rental Type</th>
       <th>Total</th>
     </tr>
   {% for order in orders %}
@@ -30,6 +31,7 @@
       <td>{{order.lesson + 0}}</td>
       <td>{{order.lift + 0}}</td>
       <td>{{order.rental + 0}}</td>
+      <td>{{order.rental_type}}</td>
       <td>{{order.total}}</td>
     </tr>
   {% endfor %}
@@ -39,6 +41,7 @@
       <td>{{status.lesson}}</td>
       <td>{{status.lift}}</td>
       <td>{{status.rental}}</td>
+      <td></td>
       <td>{{status.total}}</td>
     </tr>
   </table>

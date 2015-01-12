@@ -37,6 +37,7 @@ class Order(db.Model):
     paypal_token = db.Column(db.String(NORMAL_STRING))
     create_time = db.Column(db.DateTime)
     location = db.Column(db.String(NORMAL_STRING))
+    rental_type = db.Column(db.String(NORMAL_STRING))
 
 
 class Event(db.Model):

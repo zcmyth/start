@@ -77,6 +77,12 @@ angular.module('start').controller('PaymentCtrl', function(
                     .position('top fit'));
                 return;
         }
+        if ((parseInt($scope.form.lesson) === 1 || parseInt($scope.form.rental) === 1) && !$scope.form.rental_type) {
+            $mdToast.show($mdToast.simple()
+                    .content('Please choose rental type')
+                    .position('top fit'));
+                return;
+        }
         $scope.loading = true;
         $http.post('/api/orders', $scope.form).success(function(data) {
             if (data.status === 'success') {
