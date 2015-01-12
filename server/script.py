@@ -38,8 +38,8 @@ def update_ticket():
         id=EVENT_ID,
         description=EVENT_NAME,
         lift=64,
-        snowboard=34,
-        ski=34
+        snowboard=36,
+        ski=36
     )
     app.db.session.merge(ticket)
     app.db.session.commit()
