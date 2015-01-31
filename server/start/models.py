@@ -32,6 +32,8 @@ class Order(db.Model):
     lift = db.Column(db.Boolean)
     bus = db.Column(db.Boolean)
     lesson = db.Column(db.Boolean)
+    helmet = db.Column(db.Boolean)
+    beginner = db.Column(db.Boolean)
     status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))
     total = db.Column(db.Integer)
     paypal_token = db.Column(db.String(NORMAL_STRING))
@@ -45,9 +47,11 @@ class Event(db.Model):
     description = db.Column(db.String(NORMAL_STRING))
     rental = db.Column(db.Integer)
     lift = db.Column(db.Integer)
-    lesson = db.Column(db.Integer)
+    helmet = db.Column(db.Integer)
+    beginner = db.Column(db.Integer)
     bus = db.Column(db.Integer)
     ticket_num = db.Column(db.Integer)
+    end_date = db.Column(db.Date)
 
     @hybrid_property
     def ticket_left(self):

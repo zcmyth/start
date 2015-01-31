@@ -1,7 +1,7 @@
 import uuid
 from flask import Blueprint, request, current_app, url_for, redirect,\
     render_template
-from datetime import datetime
+from datetime import datetime, date
 from .models import Order, Event
 from .response import Response
 from paypal.exceptions import PayPalAPIResponseError
@@ -20,10 +20,14 @@ def create_order():
     if event.ticket_left < 1:
         return Response.error('Sold out')
 
+    if event.end_date < date.today():
+        return Response.error('Event has finished')
+
     total = (int(data['bus']) * event.bus
              + int(data['lift']) * event.lift
              + int(data['rental']) * event.rental
-             + int(data['lesson']) * event.lesson)
+             + int(data['beginner']) * event.beginner
+             + int(data['helmet']) * event.helmet)
     order = Order(
         id=str(uuid.uuid1()),
         event_id=data['event_id'],
@@ -34,7 +38,8 @@ def create_order():
         bus=data['bus'],
         lift=data['lift'],
         rental=data['rental'],
-        lesson=data['lesson'],
+        helmet=data['helmet'],
+        beginner=data['beginner'],
         location=data['location'],
         status='PENDING',
         create_time=datetime.utcnow(),
@@ -70,9 +75,14 @@ def create_order():
         kw[template % ('AMT', n)] = event.rental
         n = n + 1
 
-    if int(data['lesson']) > 0:
+    if int(data['beginner']) > 0:
         kw[template % ('NAME', n)] = 'Beginner package'
-        kw[template % ('AMT', n)] = event.lesson
+        kw[template % ('AMT', n)] = event.beginner
+        n = n + 1
+
+    if int(data['helmet']) > 0:
+        kw[template % ('NAME', n)] = 'helmet'
+        kw[template % ('AMT', n)] = event.helmet
         n = n + 1
 
     try:

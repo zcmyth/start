@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
+from datetime import datetime, date
 from flask.ext.script import Manager
 from start import create_app
-from settings import DEV as ENV
+from settings import PROD as ENV
 from flask.ext.migrate import Migrate, MigrateCommand
 from start.models import Event, Ticket, Order
 
@@ -13,8 +13,10 @@ manager = Manager(app)
 migrate = Migrate(app, app.db)
 manager.add_command('db', MigrateCommand)
 
-EVENT_ID = 3
-EVENT_NAME = 'Ski|Snowboarding Day Trip to Hunter Mountain Jan 18'
+
+EVENT_ID = 4
+EVENT_DATE = date(2015, 2, 7)
+EVENT_NAME = 'Ski|Snowboarding Day Trip to Blue Mountain ' + EVENT_DATE.strftime('%m/%d')
 
 
 @manager.command
@@ -22,9 +24,11 @@ def update_event():
     event = Event(
         id=EVENT_ID,
         description=EVENT_NAME,
-        rental=34,
-        lift=54,
-        lesson=62,
+        end_date = EVENT_DATE,
+        rental=30,
+        lift=55,
+        helmet=13,
+        beginner=72,
         bus=42,
         ticket_num=56
     )
@@ -37,7 +41,7 @@ def update_ticket():
     ticket = Ticket(
         id=EVENT_ID,
         description=EVENT_NAME,
-        lift=64,
+        lift=60,
         snowboard=36,
         ski=36
     )
@@ -57,6 +61,7 @@ def add_xuning():
         bus=1,
         lift=1,
         rental=1,
+        helmet=0,
         lesson=0,
         location='NEW_PORT',
         status='PAID',

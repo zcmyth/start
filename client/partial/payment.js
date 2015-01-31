@@ -8,14 +8,15 @@ angular.module('start').controller('PaymentCtrl', function(
         bus: 1,
         lift: 0,
         rental: 0,
-        lesson: 0,
+        beginner: 0,
+        helmet: 0,
         location: ''
     };
 
     var getTotal = function() {
         var data = $scope.data;
         var form = $scope.form;
-        return data.bus* form.bus + data.lift * form.lift + data.rental * form.rental + data.lesson * form.lesson;
+        return data.bus* form.bus + data.lift * form.lift + data.rental * form.rental + data.beginner * form.beginner + data.helmet * form.helmet;
     };
 
     $http.get('/api/events/' + $stateParams.event_id).success(function(data) {
@@ -32,9 +33,13 @@ angular.module('start').controller('PaymentCtrl', function(
     $scope.$watch('form.rental', function() {
         $scope.data.total = getTotal();
     });
+    
+    $scope.$watch('form.helmet', function() {
+        $scope.data.total = getTotal();
+    });
 
-    $scope.$watch('form.lesson', function() {
-        if (parseInt($scope.form.lesson) === 1) {
+    $scope.$watch('form.beginner', function() {
+        if (parseInt($scope.form.beginner) === 1) {
             $scope.form.lift = '0';
             $scope.form.rental = '0';
         }
@@ -77,7 +82,7 @@ angular.module('start').controller('PaymentCtrl', function(
                     .position('top fit'));
                 return;
         }
-        if ((parseInt($scope.form.lesson) === 1 || parseInt($scope.form.rental) === 1) && !$scope.form.rental_type) {
+        if ((parseInt($scope.form.beginner) === 1 || parseInt($scope.form.rental) === 1) && !$scope.form.rental_type) {
             $mdToast.show($mdToast.simple()
                     .content('Please choose rental type')
                     .position('top fit'));

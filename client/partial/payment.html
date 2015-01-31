@@ -28,21 +28,21 @@
         <div class="question">
             <div>Please chose the pickup location?</div>
             <md-radio-group ng-model="form.location">
-                <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 6:15 am</md-radio-button>
-                <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 6:45 am</md-radio-button>
+                <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 7:30 am</md-radio-button>
+                <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 8:00 am</md-radio-button>
             </md-radio-group>
         </div>
         </div>
 
         <div class="question">
-            <div>Do you need a beginner package, which will include beginner lift, rental and lesson? (${{data.lesson}})</div>
-            <md-radio-group ng-model="form.lesson">
+            <div>Do you need a beginner package, which will include beginner lift, rental and one and a half hours lesson? (${{data.beginner}})</div>
+            <md-radio-group ng-model="form.beginner">
                 <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
             </md-radio-group>
         </div>
 
-        <div ng-if="form.lesson == 0">
+        <div ng-if="form.beginner == 0">
         <div class="question">
             <div>Do you need a full area lift ticket? (${{data.lift}})</div>
             <md-radio-group ng-model="form.lift">
@@ -58,9 +58,17 @@
                 <md-radio-button value="0" aria-label="No">No</md-radio-button>
             </md-radio-group>
         </div>
+        
+        <div class="question">
+            <div>Do you need Helmet? (${{data.helmet}})</div>
+            <md-radio-group ng-model="form.helmet">
+                <md-radio-button value="1" aria-label="Yes">Yes</md-radio-button>
+                <md-radio-button value="0" aria-label="No">No</md-radio-button>
+            </md-radio-group>
+        </div>
         </div>
 
-        <div ng-if="form.lesson == 1 || form.rental == 1">
+        <div ng-if="form.beginner == 1 || form.rental == 1">
         <div class="question">
             <div>Do you ride ski or snownboard?</div>
             <md-radio-group ng-model="form.rental_type">
