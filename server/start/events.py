@@ -36,8 +36,8 @@ def get_event_order_status(id):
             s['lift'] += 1
         if order.rental:
             s['rental'] += 1
-        if order.lesson:
-            s['lesson'] += 1
+        if order.beginner:
+            s['beginner'] += 1
         if order.helmet:
             s['helmet'] += 1
         s['total'] += order.total

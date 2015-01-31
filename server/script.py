@@ -25,7 +25,7 @@ def update_event():
         id=EVENT_ID,
         description=EVENT_NAME,
         end_date = EVENT_DATE,
-        rental=30,
+        rental=27,
         lift=55,
         helmet=13,
         beginner=72,

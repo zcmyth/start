@@ -81,7 +81,7 @@ def create_order():
         n = n + 1
 
     if int(data['helmet']) > 0:
-        kw[template % ('NAME', n)] = 'helmet'
+        kw[template % ('NAME', n)] = 'Helmet'
         kw[template % ('AMT', n)] = event.helmet
         n = n + 1
 
