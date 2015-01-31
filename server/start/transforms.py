@@ -5,7 +5,7 @@ _transform_map = {}
 
 _transform_map[Event.__tablename__] = [
     'description', 'lift', 'rental',
-    'lesson', 'bus', 'ticket_num', 'ticket_left']
+    'beginner','helmet', 'bus', 'ticket_num', 'ticket_left']
 
 _transform_map[Ticket.__tablename__] = [
     'description', 'lift', 'snowboard', 'ski']

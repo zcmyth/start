@@ -20,6 +20,7 @@
       <th>Lift</th>
       <th>Rental</th>
       <th>Rental Type</th>
+      <th>Helmet</td>
       <th>Total</th>
     </tr>
   {% for order in orders %}
@@ -28,20 +29,22 @@
       <td>{{order.phone}}</td>
       <td>{{order.location}}</td>
       <td>{{order.bus + 0}}</td>
-      <td>{{order.lesson + 0}}</td>
+      <td>{{order.beginner + 0}}</td>
       <td>{{order.lift + 0}}</td>
       <td>{{order.rental + 0}}</td>
       <td>{{order.rental_type}}</td>
+      <td>{{order.helmet + 0}}</td>
       <td>{{order.total}}</td>
     </tr>
   {% endfor %}
     <tr>
       <td colspan="3"></td>
       <td>{{status.bus}}</td>
-      <td>{{status.lesson}}</td>
+      <td>{{status.beginner}}</td>
       <td>{{status.lift}}</td>
       <td>{{status.rental}}</td>
       <td></td>
+      <td>{{status.helmet}}</td>
       <td>{{status.total}}</td>
     </tr>
   </table>

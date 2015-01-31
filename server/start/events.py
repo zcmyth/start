@@ -25,7 +25,8 @@ def get_event_order_status(id):
         'bus': 0,
         'lift': 0,
         'rental': 0,
-        'lesson': 0,
+        'beginner': 0,
+        'helmet': 0,
         'total': 0
     }
     for order in orders:
@@ -37,6 +38,8 @@ def get_event_order_status(id):
             s['rental'] += 1
         if order.lesson:
             s['lesson'] += 1
+        if order.helmet:
+            s['helmet'] += 1
         s['total'] += order.total
 
     ticket_orders = TicketOrder.query.filter_by(
