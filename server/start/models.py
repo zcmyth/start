@@ -31,7 +31,6 @@ class Order(db.Model):
     rental = db.Column(db.Boolean)
     lift = db.Column(db.Boolean)
     bus = db.Column(db.Boolean)
-    lesson = db.Column(db.Boolean)
     helmet = db.Column(db.Boolean)
     beginner = db.Column(db.Boolean)
     status = db.Column(db.Enum('PENDING', 'FAILED', 'PAID'))

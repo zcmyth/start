@@ -62,7 +62,7 @@ def add_xuning():
         lift=1,
         rental=1,
         helmet=0,
-        lesson=0,
+        beginner=0,
         location='NEW_PORT',
         status='PAID',
         create_time=datetime.utcnow(),
