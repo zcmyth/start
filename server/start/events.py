@@ -20,7 +20,7 @@ def get_event_order_status(id):
     orders = Order.query.filter_by(
         event_id=id,
         status='PAID'
-    ).order_by(Order.location).order_by(Order.first_name).all()
+    ).order_by(Order.location).order_by(Order.last_name).all()
     s = {
         'bus': 0,
         'lift': 0,

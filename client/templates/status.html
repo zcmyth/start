@@ -12,38 +12,39 @@
   <h2>{{name}}</h2>
   <table border="2" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
     <tr>
-      <th>Name</th>
+      <th>Last Name</th>
+      <th>First Name</th>
       <th>Phone</th>
       <th>Location</th>
+      <th>Rental Type</th>
       <th>Bus</th>
       <th>Beginner Package</th>
       <th>Lift</th>
       <th>Rental</th>
-      <th>Rental Type</th>
       <th>Helmet</td>
       <th>Total</th>
     </tr>
   {% for order in orders %}
     <tr>
-      <td>{{order.first_name}} {{order.last_name}}</td>
+      <td>{{order.last_name | capitalize}}</td>
+      <td>{{order.first_name | capitalize}}</td>
       <td>{{order.phone}}</td>
       <td>{{order.location}}</td>
+      <td>{{order.rental_type}}</td>
       <td>{{order.bus + 0}}</td>
       <td>{{order.beginner + 0}}</td>
       <td>{{order.lift + 0}}</td>
       <td>{{order.rental + 0}}</td>
-      <td>{{order.rental_type}}</td>
       <td>{{order.helmet + 0}}</td>
       <td>{{order.total}}</td>
     </tr>
   {% endfor %}
     <tr>
-      <td colspan="3"></td>
+      <td colspan="5"></td>
       <td>{{status.bus}}</td>
       <td>{{status.beginner}}</td>
       <td>{{status.lift}}</td>
       <td>{{status.rental}}</td>
-      <td></td>
       <td>{{status.helmet}}</td>
       <td>{{status.total}}</td>
     </tr>
