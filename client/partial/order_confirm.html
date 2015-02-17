@@ -1,0 +1,19 @@
+<div ng-controller="OrderStatusCtrl">
+    <md-toolbar md-scroll-shrink>
+        <h2 class="md-toolbar-tools">
+        <span>{{data.description}}</span>
+      </h2>
+    </md-toolbar>
+    <md-card class="main-card">
+        <p>
+            Hi {{data.first_name}},<br/><br/>Congratulations! You have purchased the ski/snowboard package from Start New York! We are excited to see you in the coming trip.
+        </p>
+        <p>
+            You can scan the QR Code below to check the order detail.
+        </p>
+        <qrcode version="6" size="200" data="{{data.qrcode}}" style="margin:auto;" download></qrcode>
+        <p>
+            Follow <b>startnewyork</b> in wechat for more information.
+        </p>
+    </md-card>
+</div>

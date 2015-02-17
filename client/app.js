@@ -1,7 +1,7 @@
-angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial']);
+angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial', 'monospaced.qrcode']);
 
 angular.module('start').config(
-    function($stateProvider, $urlRouterProvider, $locationProvider) {
+    function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
         //$locationProvider.html5Mode(true);
         $stateProvider.state('main', {
             url: '/:event_id',
@@ -15,8 +15,16 @@ angular.module('start').config(
             url: '/ticket/:ticket_id',
             templateUrl: 'partial/ticket.html'
         });
+        $stateProvider.state('order_confirm', {
+            url: '/order_confirm/:order_id',
+            templateUrl: 'partial/order_confirm.html'
+        });
         /* Add New States Above */
         $urlRouterProvider.otherwise('/');
+
+        $mdThemingProvider.theme('default')
+            .primaryPalette('blue')
+            .accentPalette('indigo');
     });
 
 angular.module('start').run(function($rootScope) {

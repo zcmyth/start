@@ -1,5 +1,4 @@
-from flask import Flask, render_template, redirect, url_for,\
-    request, abort
+from flask import Flask, redirect, url_for
 from paypal import PayPalConfig
 from paypal import PayPalInterface
 from .utils import CustomJSONEncoder
@@ -38,6 +37,9 @@ def create_app(config):
     app.db = db
     db.init_app(app)
 
+    # from .login import login_manager
+    # login_manager.init_app(app)
+
     from .response import init as response_init
     response_init(app)
 
@@ -48,10 +50,10 @@ def create_app(config):
     import orders
     app.register_blueprint(orders.bp, url_prefix='/api/orders')
 
-    import tickets
-    app.register_blueprint(tickets.bp, url_prefix='/api/tickets')
-
     import events
     app.register_blueprint(events.bp, url_prefix='/api/events')
+
+    # import wechat
+    # app.register_blueprint(wechat.bp, url_prefix='/api/wechat')
 
     return app

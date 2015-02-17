@@ -31,3 +31,4 @@ class CustomJSONEncoder(JSONEncoder):
         if hasattr(obj, '__tablename__'):
             return transform_sqlalchemy_obj(obj)
         return JSONEncoder.default(self, obj)
+

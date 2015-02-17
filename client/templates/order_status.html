@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+</head>
+
+<body>
+  <h2>{{order.event.description}}</h2>
+  <div style="width:90%;margin:auto">
+  <table>
+    <tr>
+      <td>Name</td><td>{{order.first_name | capitalize}} {{order.last_name | capitalize}}</td>
+    </tr>
+    <tr>
+      <td>Phone</td><td>{{order.phone}}</td>
+    </tr>
+
+    {% if order.bus > 0 %}
+    <tr>
+      <td>Bus</td><td>{{order.bus}}</td>
+    </tr>
+     <tr>
+      <td>Pickup location</td><td>{{order.location}}</td>
+    </tr>
+    {% endif %}
+
+    {% if order.lift > 0 %}
+    <tr>
+      <td>Lift</td><td>{{order.lift}}</td>
+    </tr>
+    {% endif %}
+
+    {% if order.rental > 0 %}
+    <tr>
+      <td>Rental</td><td>{{order.rental}}</td>
+    </tr>
+    {% endif %}
+
+    {% if order.beginner > 0 %}
+    <tr>
+      <td>Beginner package</td><td>{{order.beginner}}</td>
+    </tr>
+    {% endif %}
+
+    {% if order.helmet > 0 %}
+    <tr>
+      <td>Helmet</td><td>{{order.helmet}}</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>Total</td><td>${{order.total}}</td>
+    </tr>
+  </table>
+
+  <p>
+    To get more information about this event, please follow <b>startnewyork</b> in wechat.
+  </p>
+  <p>
+  <img src="/static/images/logo.jpg" style="margin:auto;display:block;width:70%" />
+  </p>
+  <div>
+</body>
+
+</html>

@@ -4,6 +4,8 @@ Flask-SQLAlchemy
 Flask-Script
 Flask-Migrate
 Flask-HTTPAuth
+Flask-Login
+Flask-OAuthlib
 mysql-python
 python-dateutil
 pytz

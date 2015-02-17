@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from .models import Event, Order, TicketOrder
+from .models import Event, Order
 from .response import Response
 from .httpauth import auth
 
@@ -42,13 +42,8 @@ def get_event_order_status(id):
             s['helmet'] += 1
         s['total'] += order.total
 
-    ticket_orders = TicketOrder.query.filter_by(
-        ticket_id=id,
-        status='PAID'
-    ).all()
     return render_template(
         'status.html',
         name=event.description,
         orders=orders,
-        status=s,
-        ticket_orders=ticket_orders)
+        status=s)

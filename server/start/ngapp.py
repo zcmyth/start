@@ -9,4 +9,4 @@ bp = Blueprint(
 
 @bp.route('/app/', methods=['GET'])
 def home():
-  return bp.send_static_file('index.html')
+    return bp.send_static_file('index.html')

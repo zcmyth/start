@@ -31,11 +31,11 @@
       <td>{{order.phone}}</td>
       <td>{{order.location}}</td>
       <td>{{order.rental_type}}</td>
-      <td>{{order.bus + 0}}</td>
-      <td>{{order.beginner + 0}}</td>
-      <td>{{order.lift + 0}}</td>
-      <td>{{order.rental + 0}}</td>
-      <td>{{order.helmet + 0}}</td>
+      <td>{{order.bus}}</td>
+      <td>{{order.beginner}}</td>
+      <td>{{order.lift}}</td>
+      <td>{{order.rental}}</td>
+      <td>{{order.helmet}}</td>
       <td>{{order.total}}</td>
     </tr>
   {% endfor %}
@@ -49,28 +49,6 @@
       <td>{{status.total}}</td>
     </tr>
   </table>
-
-  {% if ticket_orders %}
-  <h2>Group tickets</h2>
-  <table border="2" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
-    <tr>
-      <th>Name</th>
-      <th>Lift</th>
-      <th>Snowboard</th>
-      <th>Ski</th>
-      <th>Total</th>
-    </tr>
-  {% for order in ticket_orders %}
-    <tr>
-      <td>{{order.first_name}} {{order.last_name}}</td>
-      <td>{{order.lift}}</td>
-      <td>{{order.snowboard}}</td>
-      <td>{{order.ski}}</td>
-      <td>{{order.total}}</td>
-    </tr>
-  {% endfor %}
-  </table>
-  {% endif %}
 </body>
 
 </html>

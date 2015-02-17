@@ -1,22 +1,28 @@
 angular.module('start').controller('PaymentCtrl', function(
-    $scope, $mdToast, $http, $stateParams, $window) {
+    $scope, $mdToast, $http, $stateParams, $window, $mdDialog) {
 
+    var items = [
+        'bus', 'lift', 'rental', 'beginner', 'helmet'
+    ];
     $scope.loading = false;
     $scope.data = {};
     $scope.form = {
         event_id: $stateParams.event_id,
         bus: 1,
-        lift: 0,
-        rental: 0,
-        beginner: 0,
-        helmet: 0,
         location: ''
     };
+    var haveOwnTicket = false;
 
     var getTotal = function() {
         var data = $scope.data;
         var form = $scope.form;
-        return data.bus* form.bus + data.lift * form.lift + data.rental * form.rental + data.beginner * form.beginner + data.helmet * form.helmet;
+        var total = 0;
+        angular.forEach(items, function(value) {
+            if (form[value]) {
+                total += data[value] * form[value];
+            }
+        });
+        return total;
     };
 
     $http.get('/api/events/' + $stateParams.event_id).success(function(data) {
@@ -31,6 +37,7 @@ angular.module('start').controller('PaymentCtrl', function(
     });
 
     $scope.$watch('form.rental', function() {
+        $scope.form.rental_type = undefined;
         $scope.data.total = getTotal();
     });
     
@@ -39,15 +46,15 @@ angular.module('start').controller('PaymentCtrl', function(
     });
 
     $scope.$watch('form.beginner', function() {
-        if (parseInt($scope.form.beginner) === 1) {
-            $scope.form.lift = '0';
-            $scope.form.rental = '0';
+        if (parseInt($scope.form.beginner) > 0) {
+            $scope.form.lift = undefined;
+            $scope.form.rental = undefined;
         }
         $scope.data.total = getTotal();
     });
     $scope.$watch('form.bus', function() {
-        if (parseInt($scope.form.bus) === 1) {
-            $scope.form.location = '';
+        if (parseInt($scope.form.bus) > 0) {
+            $scope.form.location = undefined;
         }
         $scope.data.total = getTotal();
     });
@@ -59,9 +66,6 @@ angular.module('start').controller('PaymentCtrl', function(
         }, {
             value: $scope.form.last_name,
             name: 'Last Name'
-        }, {
-            value: $scope.form.email,
-            name: 'Email'
         }, {
             value: $scope.form.phone,
             name: 'Phone'
@@ -82,9 +86,23 @@ angular.module('start').controller('PaymentCtrl', function(
                     .position('top fit'));
                 return;
         }
+        if (!(parseInt($scope.form.beginner) === 1 || parseInt($scope.form.lift) === 1) && !haveOwnTicket) {
+            $mdToast.show($mdToast.simple()
+                    .content('You need a beginner package or a lift ticket to enjoy your ride. Click checkout again if you have your own lift ticket')
+                    .hideDelay(5000)
+                    .position('top fit'));
+            haveOwnTicket = true;
+            return;
+        }
         if ((parseInt($scope.form.beginner) === 1 || parseInt($scope.form.rental) === 1) && !$scope.form.rental_type) {
             $mdToast.show($mdToast.simple()
                     .content('Please choose rental type')
+                    .position('top fit'));
+                return;
+        }
+         if (!$scope.form.consent) {
+            $mdToast.show($mdToast.simple()
+                    .content('Please read the liability waiver')
                     .position('top fit'));
                 return;
         }
@@ -105,4 +123,16 @@ angular.module('start').controller('PaymentCtrl', function(
             $scope.loading = false;
         });
     };
+
+    $scope.showConsent = function() {
+        $mdDialog.show({
+            templateUrl: 'partial/consent.html',
+            controller: function(scope, $mdDialog) {
+                scope.closeDialog = function() {
+                    $mdDialog.hide();
+                };
+            }
+        });
+    };
 });
+

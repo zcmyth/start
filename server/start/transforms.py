@@ -1,16 +1,11 @@
-from .models import Event, Order, Ticket
+from .models import Event
 
 _transform_map = {}
 
 
 _transform_map[Event.__tablename__] = [
     'description', 'lift', 'rental',
-    'beginner','helmet', 'bus', 'ticket_num', 'ticket_left']
-
-_transform_map[Ticket.__tablename__] = [
-    'description', 'lift', 'snowboard', 'ski']
-
-_transform_map[Order.__tablename__] = []
+    'beginner', 'helmet', 'bus', 'ticket_num', 'ticket_left']
 
 
 def transform_sqlalchemy_obj(obj):
