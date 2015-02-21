@@ -137,3 +137,21 @@ def order_status(order_id):
     if order.status != 'PAID':
         return 'Invalid order'
     return render_template('order_status.html', order=order)
+
+
+@bp.route('/<order_id>/bus', methods=['POST'])
+def update_order_status_bus(order_id):
+    order = Order.query.get(order_id)
+    if order.status != 'PAID':
+        return Response.error('Invalid order')
+    order.checked_in = not order.checked_in
+    return Response.success()
+
+
+@bp.route('/<order_id>/ticket', methods=['POST'])
+def update_order_status_ticket(order_id):
+    order = Order.query.get(order_id)
+    if order.status != 'PAID':
+        return Response.error('Invalid order')
+    order.ticket_picked = not order.ticket_picked
+    return Response.success()

@@ -47,3 +47,15 @@ def get_event_order_status(id):
         name=event.description,
         orders=orders,
         status=s)
+
+
+@bp.route('/<int:id>/statuss', methods=['GET'])
+def get_event_order_statuss(id):
+    event = Event.query.get(id)
+    if not event:
+        return 'Invalid event id'
+    orders = Order.query.filter_by(
+        event_id=id,
+        status='PAID'
+    ).order_by(Order.location).order_by(Order.last_name).all()
+    return Response.success(orders)

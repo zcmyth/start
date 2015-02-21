@@ -46,6 +46,8 @@ class Order(db.Model):
     create_time = db.Column(db.DateTime)
     location = db.Column(db.String(NORMAL_STRING))
     rental_type = db.Column(db.String(NORMAL_STRING))
+    checked_in = db.Column(db.Boolean())
+    ticket_picked = db.Column(db.Boolean())
 
 
 class Event(db.Model):

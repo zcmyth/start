@@ -1,4 +1,4 @@
-angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial', 'monospaced.qrcode']);
+angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial', 'monospaced.qrcode', 'ngTable']);
 
 angular.module('start').config(
     function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
@@ -18,6 +18,10 @@ angular.module('start').config(
         $stateProvider.state('order_confirm', {
             url: '/order_confirm/:order_id',
             templateUrl: 'partial/order_confirm.html'
+        });
+        $stateProvider.state('admin', {
+            url: '/admin/:event_id',
+            templateUrl: 'partial/admin.html'
         });
         /* Add New States Above */
         $urlRouterProvider.otherwise('/');
@@ -43,4 +47,10 @@ angular.module('start').run(function($rootScope) {
 });
 
 angular.module('start').controller('MainCtrl', function($rootScope, $scope) {
+});
+
+angular.module('start').filter('capitalize', function() {
+    return function(input, all) {
+        return (!!input) ? input.replace(/([^\W_]+[^\s-]*) */g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+    };
 });

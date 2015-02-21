@@ -15,6 +15,7 @@
     "font-awesome": "latest",
     "angular-material": "latest",
     "hammerjs": "latest",
-    "angular-qrcode": "latest"
+    "angular-qrcode": "latest",
+    " ng-table": "latest"
   }
 }
