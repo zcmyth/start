@@ -134,4 +134,6 @@ def get_order(order_id):
 @bp.route('/<order_id>/status')
 def order_status(order_id):
     order = Order.query.get(order_id)
+    if order.status != 'PAID':
+        return 'Invalid order'
     return render_template('order_status.html', order=order)
