@@ -1,4 +1,5 @@
 <div ng-controller="AdminCtrl" style="padding:10px">
+    <h2>Bus check in</h2>
     <table ng-table="tableParams" border="2" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
         <tr ng-repeat="order in $data">
             <td data-title="'B'" sortable="'checked_in'"><input type="checkbox" ng-click="bus(order.id)" ng-model="order.checked_in"/></td>
