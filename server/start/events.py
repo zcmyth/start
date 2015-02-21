@@ -50,6 +50,7 @@ def get_event_order_status(id):
 
 
 @bp.route('/<int:id>/statuss', methods=['GET'])
+@auth.login_required
 def get_event_order_statuss(id):
     event = Event.query.get(id)
     if not event:
