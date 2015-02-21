@@ -11,17 +11,17 @@ angular.module('start').config(
             url: '/trip/:event_id',
             templateUrl: 'partial/payment.html'
         });
-        $stateProvider.state('ticket', {
-            url: '/ticket/:ticket_id',
-            templateUrl: 'partial/ticket.html'
-        });
         $stateProvider.state('order_confirm', {
             url: '/order_confirm/:order_id',
             templateUrl: 'partial/order_confirm.html'
         });
-        $stateProvider.state('admin', {
-            url: '/admin/:event_id',
-            templateUrl: 'partial/admin.html'
+        $stateProvider.state('bus', {
+            url: '/bus/:event_id',
+            templateUrl: 'partial/bus.html'
+        });
+        $stateProvider.state('ticket', {
+            url: '/ticket/:event_id',
+            templateUrl: 'partial/ticket.html'
         });
         /* Add New States Above */
         $urlRouterProvider.otherwise('/');
