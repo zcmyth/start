@@ -14,9 +14,9 @@ migrate = Migrate(app, app.db)
 manager.add_command('db', MigrateCommand)
 
 
-EVENT_ID = 5
-EVENT_DATE = date(2015, 2, 21)
-EVENT_NAME = 'Ski|Snowboarding Day Trip to Windham ' + EVENT_DATE.strftime('%m/%d')
+EVENT_ID = 6
+EVENT_DATE = date(2015, 2, 28)
+EVENT_NAME = 'Ski|Snowboarding Day Trip to Blue Mountain ' + EVENT_DATE.strftime('%m/%d')
 
 
 @manager.command
@@ -26,10 +26,10 @@ def update_event():
         description=EVENT_NAME,
         event_date=EVENT_DATE,
         bus=42,
-        lift=52,
-        rental=33,
-        beginner=70,
-        helmet=9999,
+        lift=55,
+        rental=27,
+        beginner=76,
+        helmet=13,
         ticket_num=50
     )
     app.db.session.merge(event)

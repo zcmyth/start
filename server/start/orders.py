@@ -45,7 +45,9 @@ def create_order():
         status='PENDING',
         create_time=datetime.utcnow(),
         total=total,
-        rental_type=data.get('rental_type', '')
+        rental_type=data.get('rental_type', ''),
+        checked_in=False,
+        ticket_picked=False
     )
 
     kw = {
