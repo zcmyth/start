@@ -3,7 +3,7 @@
 from datetime import datetime, date
 from flask.ext.script import Manager
 from start import create_app
-from settings import DEV as ENV
+from settings import PROD as ENV
 from flask.ext.migrate import Migrate, MigrateCommand
 from start.models import Event, Order
 
@@ -28,7 +28,7 @@ def update_event():
         bus=42,
         lift=55,
         rental=27,
-        beginner=76,
+        beginner=72,
         helmet=13,
         ticket_num=50
     )
@@ -39,13 +39,13 @@ def update_event():
 @manager.command
 def add_xuning():
     order = Order(
-        id='XXXXXXXX',
+        id='XXXXXXXX' + str(EVENT_ID),
         event_id=EVENT_ID,
         first_name='Ning',
         last_name='Xu',
         phone='',
         bus=1,
-        lift=1,
+        lift=0,
         rental=1,
         helmet=0,
         beginner=0,
