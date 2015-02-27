@@ -37,6 +37,13 @@ def update_event():
 
 
 @manager.command
+def close_event():
+    event = Event.query.get(EVENT_ID)
+    event.status = 'INACTIVE'
+    app.db.session.commit()
+
+
+@manager.command
 def add_xuning():
     order = Order(
         id='XXXXXXXX' + str(EVENT_ID),

@@ -60,6 +60,7 @@ class Event(db.Model):
     bus = db.Column(db.Integer)
     ticket_num = db.Column(db.Integer)
     event_date = db.Column(db.Date)
+    status = db.Column(db.Enum('ACTIVE', 'INACTIVE'))
 
     @hybrid_property
     def ticket_left(self):

@@ -20,6 +20,9 @@ def create_order():
     if event.ticket_left < 1:
         return Response.error('Sold out')
 
+    if event.status == 'INACTIVE':
+        return Response.error('The order system has been closed. If you have any questions, please contact info@startnewyork.us')
+
     if event.event_date < date.today():
         return Response.error('Event has finished')
 
