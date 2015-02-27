@@ -6,7 +6,7 @@
     </md-toolbar>
     <md-card class="main-card">
         <form name="orderForm">
-            <div class="ticket_left">{{data.ticket_left}} bus tickets left</div>
+            <div class="ticket_left" ng-if="ticket_left<15">{{data.ticket_left}} bus tickets left</div>
             <div layout="row" layout="center center">
                 <md-input-container>
                     <label>First Name</label>
