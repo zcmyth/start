@@ -6,7 +6,7 @@
     </md-toolbar>
     <md-card class="main-card">
         <form name="orderForm">
-            <div class="ticket_left" ng-if="ticket_left<15">{{data.ticket_left}} bus tickets left</div>
+            <div class="ticket_left" ng-if="ticket_left<10">{{data.ticket_left}} bus tickets left</div>
             <div layout="row" layout="center center">
                 <md-input-container>
                     <label>First Name</label>
@@ -36,8 +36,8 @@
             <div class="question">
                 <div>Please choose the pickup location</div>
                 <md-radio-group ng-model="form.location">
-                    <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 7:15 a.m.</md-radio-button>
-                    <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 7:45 a.m.</md-radio-button>
+                    <md-radio-button value="PENN_STATION" aria-label="Penn station">Penn station at 7:30 a.m.</md-radio-button>
+                    <md-radio-button value="NEW_PORT" aria-label="New port">Newport at 8:00 a.m.</md-radio-button>
                 </md-radio-group>
             </div>
         </div>

@@ -14,9 +14,9 @@ migrate = Migrate(app, app.db)
 manager.add_command('db', MigrateCommand)
 
 
-EVENT_ID = 6
-EVENT_DATE = date(2015, 2, 28)
-EVENT_NAME = 'Ski|Snowboarding Day Trip to Blue Mountain ' + EVENT_DATE.strftime('%m/%d')
+EVENT_ID = 7
+EVENT_DATE = date(2015, 3, 7)
+EVENT_NAME = 'Ski|Snowboarding Day Trip to Camelback MT ' + EVENT_DATE.strftime('%m/%d')
 
 
 @manager.command
@@ -26,9 +26,9 @@ def update_event():
         description=EVENT_NAME,
         event_date=EVENT_DATE,
         bus=42,
-        lift=55,
-        rental=27,
-        beginner=72,
+        lift=51,
+        rental=32,
+        beginner=80,
         helmet=13,
         ticket_num=50
     )
@@ -53,14 +53,14 @@ def add_xuning():
         phone='',
         bus=1,
         lift=0,
-        rental=1,
+        rental=0,
         helmet=0,
         beginner=0,
         location='NEW_PORT',
         status='PAID',
         create_time=datetime.utcnow(),
         total=0,
-        rental_type='SKI'
+        rental_type=''
     )
     app.db.session.merge(order)
     app.db.session.commit()
