@@ -16,6 +16,7 @@
     "angular-material": "latest",
     "hammerjs": "latest",
     "angular-qrcode": "latest",
-    " ng-table": "latest"
+    "ng-table": "latest",
+    "angulartics": "latest"
   }
 }

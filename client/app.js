@@ -1,8 +1,9 @@
-angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial', 'monospaced.qrcode', 'ngTable']);
+angular.module('start', ['ui.router', 'ngAnimate', 'ngMaterial', 'monospaced.qrcode', 'ngTable', 'angulartics', 'angulartics.google.analytics']);
 
 angular.module('start').config(
-    function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
+    function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider, $analyticsProvider) {
         //$locationProvider.html5Mode(true);
+        $analyticsProvider.virtualPageviews(false);
         $stateProvider.state('main', {
             url: '/:event_id',
             templateUrl: 'partial/payment.html'

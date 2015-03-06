@@ -5,8 +5,9 @@ angular.module('start').controller('ConsentCtrl', function($scope, $mdDialog) {
 });
 
 angular.module('start').controller('PaymentCtrl', function(
-    $scope, $mdToast, $http, $stateParams, $window, $mdDialog) {
+    $scope, $mdToast, $http, $stateParams, $window, $mdDialog, $analytics) {
 
+    $analytics.pageTrack('/startnewyork/payment/' + $stateParams.event_id);
     var items = [
         'bus', 'lift', 'rental', 'beginner', 'helmet'
     ];

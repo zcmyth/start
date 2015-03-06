@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask
 from paypal import PayPalConfig
 from paypal import PayPalInterface
 from .utils import CustomJSONEncoder
@@ -31,8 +31,8 @@ def create_app(config):
         config=PayPalConfig(**app.config['PAYPAL_CONFIG']))
 
     @app.route('/')
-    def to_app():
-        return redirect(url_for('ngapp.home'))
+    def home():
+        return app.send_static_file('wix.html')
 
     app.db = db
     db.init_app(app)

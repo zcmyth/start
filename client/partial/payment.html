@@ -97,7 +97,7 @@
         <div class="total">Total: ${{data.total}}</div>
         <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary checkout-btn" ng-if="data.ticket_left && !loading"
-                ng-click="submit()">Checkout</md-button>
+                ng-click="submit()" analytics-on="click" analytics-event="Purchase">Checkout</md-button>
             <md-progress-circular ng-if="loading" md-mode="indeterminate"></md-progress-circular>
             <img ng-src="/static/images/soldout.png" ng-if="!data.ticket_left"/>
         </div>
