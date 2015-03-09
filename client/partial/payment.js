@@ -1,9 +1,3 @@
-angular.module('start').controller('ConsentCtrl', function($scope, $mdDialog) {
-    $scope.closeDialog = function() {
-        $mdDialog.hide();
-    };
-});
-
 angular.module('start').controller('PaymentCtrl', function(
     $scope, $mdToast, $http, $stateParams, $window, $mdDialog, $analytics, event) {
 
@@ -130,7 +124,11 @@ angular.module('start').controller('PaymentCtrl', function(
     $scope.showConsent = function() {
         $mdDialog.show({
             templateUrl: 'partial/consent.html',
-            controller: 'ConsentCtrl'
+            controller: function(scope, $mdDialog) {
+                scope.closeDialog = function() {
+                    $mdDialog.hide();
+                };
+            }
         });
     };
 });
