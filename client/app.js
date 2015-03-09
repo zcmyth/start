@@ -6,11 +6,17 @@ angular.module('start').config(
         $analyticsProvider.virtualPageviews(false);
         $stateProvider.state('main', {
             url: '/:event_id',
-            templateUrl: 'partial/payment.html'
-        });
-        $stateProvider.state('trip', {
-            url: '/trip/:event_id',
-            templateUrl: 'partial/payment.html'
+            templateUrl: 'partial/payment.html',
+            resolve: {
+                event:  function($http, $stateParams) {
+                    return $http.get('/api/events/' + $stateParams.event_id).then(function (data) {
+                        if (data.status === 200 && data.data.status === 'success') {
+                            return data.data.data;
+                        }
+                    });
+                }
+            },
+            controller: 'PaymentCtrl'
         });
         $stateProvider.state('order_confirm', {
             url: '/order_confirm/:order_id',

@@ -5,20 +5,7 @@ angular.module('start').controller('ConsentCtrl', function($scope, $mdDialog) {
 });
 
 angular.module('start').controller('PaymentCtrl', function(
-    $scope, $mdToast, $http, $stateParams, $window, $mdDialog, $analytics) {
-
-    $analytics.pageTrack('/startnewyork/payment/' + $stateParams.event_id);
-    var items = [
-        'bus', 'lift', 'rental', 'beginner', 'helmet'
-    ];
-    $scope.loading = false;
-    $scope.data = {};
-    $scope.form = {
-        event_id: $stateParams.event_id,
-        bus: 1,
-        location: ''
-    };
-    var haveOwnTicket = false;
+    $scope, $mdToast, $http, $stateParams, $window, $mdDialog, $analytics, event) {
 
     var getTotal = function() {
         var data = $scope.data;
@@ -32,12 +19,20 @@ angular.module('start').controller('PaymentCtrl', function(
         return total;
     };
 
-    $http.get('/api/events/' + $stateParams.event_id).success(function(data) {
-        if (data.status === 'success') {
-            $scope.data = data.data;
-            $scope.data.total = getTotal();
-        }
-    });
+    $scope.data = event;
+    $scope.data.total = getTotal();
+
+    $analytics.pageTrack('/startnewyork/payment/' + $stateParams.event_id);
+    var items = [
+        'bus', 'lift', 'rental', 'beginner', 'helmet'
+    ];
+    $scope.loading = false;
+    $scope.form = {
+        event_id: $stateParams.event_id,
+        bus: 1,
+        location: ''
+    };
+    var haveOwnTicket = false;
 
     $scope.$watch('form.lift', function() {
         $scope.data.total = getTotal();
@@ -114,6 +109,7 @@ angular.module('start').controller('PaymentCtrl', function(
                 return;
         }
         $scope.loading = true;
+        $analytics.eventTrack('Purchase', {  category: 'Purchase', label: $stateParams.event_id });
         $http.post('/api/orders', $scope.form).success(function(data) {
             if (data.status === 'success') {
                 $window.location.href = data.data;
